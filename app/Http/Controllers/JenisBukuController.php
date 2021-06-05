@@ -65,7 +65,7 @@ class JenisBukuController extends Controller
     {
         //
         $jenisbuku = JenisBuku::find($id);
-        return view('buku', ['jnsBuku' => $jenisbuku]);
+        return view('editjenis0200', ['jnsBuku' => $jenisbuku]);
     }
 
     /**

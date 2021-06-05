@@ -132,7 +132,7 @@
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target="#buku">Tambah Buku</button>
 
-                                        <!-- Modal Jenis Buku -->
+                                        <!-- Modal Buku -->
                                         <div class="modal fade" id="buku" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -250,48 +250,11 @@
                                             <td>{{ $dBuku->jenis }}</td>
                                             <td>{{ $dBuku->tahun_terbit }}</td>
                                             <td>
-                                                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal"
-                                                data-target="#editjenisbuku">Edit Jenis Buku</button>
-                                                
-
+                                                <a href="{{ url('jenisbuku/'. $dBuku->id_jenis_buku.'/edit') }}" class="btn btn-sm btn-warning">Edit Jenis Buku</a>
+                                                <a href="{{ url('buku/'. $dBuku->id_buku.'/edit') }}" class="btn btn-sm btn-warning">Edit Buku</a>
                                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                             </td>
                                         </tr>
-
-                                        <!-- Modal Jenis Buku -->
-                                        <div class="modal fade" id="editjenisbuku" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Data
-                                                            Jenis Buku
-                                                        </h5>
-                                                        <button type="button" class="close btn-danger"
-                                                            data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form method="POST" action="{{ url('jenisbuku/'. $dBuku->id) }}">
-                                                            @csrf
-                                                            <input type="hidden" name="_method" value="patch">
-                                                            <div class="form-group">
-                                                                <label for="jenis">Jenis</label>
-                                                                <input type="text" class="form-control"
-                                                                    name="jenis" id="jenis" value="{{ $dBuku->jenis }}">
-                                                            </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Tutup</button>
-                                                        <button type="submit" class="btn btn-primary">Simpan</button>
-                                                    </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -303,7 +266,7 @@
             <footer class="footer mt-auto footer-light">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-6 small">Copyright &#xA9; Dashboard BPP 2020</div>
+                        <div class="col-md-6 small">Copyright &#xA9; Praktikum 3 - Pengembangan Teknologi Web</div>
                         <div class="col-md-6 text-md-right small">
                             <a href="#!">Privacy Policy</a>
                             &#xB7;
