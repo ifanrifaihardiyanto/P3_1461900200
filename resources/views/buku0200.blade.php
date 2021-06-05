@@ -49,7 +49,7 @@
 
 <body class="nav-fixed">
     <nav class="topnav navbar navbar-expand shadow navbar-light bg-white" id="sidenavAccordion">
-        <a class="navbar-brand" href="index.html">Tugas Kegiatan 3</a>
+        <a class="navbar-brand" href="{{'/'}}">Tugas Kegiatan 3</a>
         <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 mr-lg-2" id="sidebarToggle" href="#"><i
                 data-feather="menu"></i></button>
 
@@ -65,7 +65,7 @@
                             Home
                         </a>
 
-                        <a class="nav-link" href="{{'buku0200'}}">
+                        <a class="nav-link" href="{{'buku'}}">
                             Data Buku
                         </a>
 
@@ -102,8 +102,7 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLongTitle">Input Data
-                                                            Jenis
-                                                            Buku
+                                                            Jenis Buku
                                                         </h5>
                                                         <button type="button" class="close btn-danger"
                                                             data-dismiss="modal" aria-label="Close">
@@ -111,11 +110,13 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form method="POST" action="">
+                                                        <form method="POST" action="{{ route('jenisbuku.store') }}">
+                                                            @csrf
                                                             <div class="form-group">
-                                                                <label for="jenisBuku">Jenis Buku</label>
-                                                                <input type="text" class="form-control" name="jenisBuku"
-                                                                    id="jenisBuku" placeholder="Masukkan jenis buku">
+                                                                <label for="jenis">Jenis</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="jenis" id="jenis"
+                                                                    placeholder="Masukkan jenis buku">
                                                             </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -146,16 +147,17 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form method="POST" action="">
+                                                        <form action="{{ route('buku.store') }}" method="POST">
+                                                            @csrf
                                                             <div class="form-group">
                                                                 <label for="jenisBuku">Nama Buku</label>
-                                                                <input type="text" class="form-control" name="Buku"
+                                                                <input type="text" class="form-control" name="judul"
                                                                     id="Buku" placeholder="Masukkan nama buku">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="tahunterbit">Tahun Terbit</label>
                                                                 <input type="text" class="form-control"
-                                                                    name="tahunterbit" id="tahunterbit"
+                                                                    name="tahun_terbit" id="tahunterbit"
                                                                     placeholder="Masukkan tahun terbit">
                                                             </div>
                                                     </div>
@@ -163,8 +165,55 @@
                                                         <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Tutup</button>
                                                         <button type="submit" class="btn btn-primary">Simpan</button>
+                                                        </form>
                                                     </div>
-                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#rakbuku">Tambah Rak Buku</button>
+
+                                        <!-- Modal Jenis Buku -->
+                                        <div class="modal fade" id="rakbuku" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Input Data
+                                                            Buku
+                                                        </h5>
+                                                        <button type="button" class="close btn-danger"
+                                                            data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="{{ route('rakbuku.store') }}" method="POST">
+                                                            @csrf
+                                                            <div class="form-group">
+                                                                <label for="exampleFormControlSelect1">Nama Buku</label>
+                                                                <select class="form-control" name="namaBuku" id="exampleFormControlSelect1">
+                                                                    @foreach ($dataidBuku as $didBuku)
+                                                                        <option value="{{ $didBuku->id }}">{{ $didBuku->judul }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="exampleFormControlSelect1">Jenis Buku</label>
+                                                                <select class="form-control" name="jenisBuku" id="exampleFormControlSelect1">
+                                                                    @foreach ($dataidJenisBuku as $didJenisBuku)
+                                                                        <option value="{{ $didJenisBuku->id }}">{{ $didJenisBuku->jenis }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Tutup</button>
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -201,10 +250,48 @@
                                             <td>{{ $dBuku->jenis }}</td>
                                             <td>{{ $dBuku->tahun_terbit }}</td>
                                             <td>
-                                                <button type="submit" class="btn btn-sm btn-warning">Edit</button>
+                                                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal"
+                                                data-target="#editjenisbuku">Edit Jenis Buku</button>
+                                                
+
                                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                             </td>
                                         </tr>
+
+                                        <!-- Modal Jenis Buku -->
+                                        <div class="modal fade" id="editjenisbuku" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Data
+                                                            Jenis Buku
+                                                        </h5>
+                                                        <button type="button" class="close btn-danger"
+                                                            data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="POST" action="{{ url('jenisbuku/'. $dBuku->id) }}">
+                                                            @csrf
+                                                            <input type="hidden" name="_method" value="patch">
+                                                            <div class="form-group">
+                                                                <label for="jenis">Jenis</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="jenis" id="jenis" value="{{ $dBuku->jenis }}">
+                                                            </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Tutup</button>
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         @endforeach
                                     </tbody>
                                 </table>

@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Buku extends Model
+class RakBuku extends Model
 {
     use HasFactory;
 
-    protected $table = 'buku';
+    protected $table = 'rak_buku';
+
     public $timestamps = false;
 
     protected $fillable = [
         'id',
-        'judul',
-        'tahun_terbit',
+        'id_buku',
+        'id_jenis_buku',
     ];
 }

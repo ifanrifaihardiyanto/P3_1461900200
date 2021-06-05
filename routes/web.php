@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\JenisBukuController;
+use App\Http\Controllers\RakBukuController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +18,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [IndexController::class, 'index']);
-Route::resource('buku0200', BukuController::class);
+Route::resource('buku', BukuController::class);
+Route::resource('jenisbuku', JenisBukuController::class);
+Route::resource('rakbuku', RakBukuController::class);

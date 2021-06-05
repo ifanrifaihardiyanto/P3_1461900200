@@ -65,7 +65,7 @@
                             Home
                         </a>
 
-                        <a class="nav-link" href="{{'buku0200'}}">
+                        <a class="nav-link" href="{{'buku'}}">
                             Data Buku
                         </a>
 

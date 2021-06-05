@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Buku;
+use App\Models\RakBuku;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class BukuController extends Controller
+class RakBukuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,16 +14,7 @@ class BukuController extends Controller
      */
     public function index()
     {
-        $dataBuku = DB::table('rak_buku')
-            ->join('buku', 'id_buku', '=', 'buku.id')
-            ->join('jenis_buku', 'id_jenis_buku', '=', 'jenis_buku.id')
-            ->get();
-
-        $dataidBuku = DB::table('buku')->get();
-        $dataidJenisBuku = DB::table('jenis_buku')->get();
-
-        // print("<pre>" . print_r($dataidBuku, true) . "</​pre>");
-        return view('buku0200', ['dataBuku' => $dataBuku, 'dataidBuku' => $dataidBuku, 'dataidJenisBuku' => $dataidJenisBuku]);
+        //
     }
 
     /**
@@ -35,7 +25,7 @@ class BukuController extends Controller
     public function create()
     {
         //
-        return view('buku0200');
+        return view('buku');
     }
 
     /**
@@ -47,9 +37,9 @@ class BukuController extends Controller
     public function store(Request $request)
     {
         //
-        Buku::create([
-            'judul' => $request->judul,
-            'tahun_terbit' => $request->tahun_terbit,
+        RakBuku::create([
+            'id_buku' => $request->namaBuku,
+            'id_jenis_buku' => $request->jenisBuku,
         ]);
 
         return redirect('buku');
@@ -74,9 +64,7 @@ class BukuController extends Controller
      */
     public function edit($id)
     {
-        // $buku = Buku::find($id);
-
-        // return view('buku', ['buku' => $buku, 'jenisbuku' => $jenisbuku]);
+        //
     }
 
     /**
