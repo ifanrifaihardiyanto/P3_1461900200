@@ -252,7 +252,11 @@
                                             <td>
                                                 <a href="{{ url('jenisbuku/'. $dBuku->id_jenis_buku.'/edit') }}" class="btn btn-sm btn-warning">Edit Jenis Buku</a>
                                                 <a href="{{ url('buku/'. $dBuku->id_buku.'/edit') }}" class="btn btn-sm btn-warning">Edit Buku</a>
-                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                                <form action="{{ url('buku/'.$dBuku->id) }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="_method" value="delete">
+                                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @endforeach
