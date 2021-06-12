@@ -94,9 +94,5 @@ class JenisBukuController extends Controller
     public function destroy($id)
     {
         //
-        $jenisbuku = JenisBuku::find($id);
-        $jenisbuku->delete();
-
-        return redirect('buku');
     }
 }

@@ -220,10 +220,12 @@
 
                                     </div>
                                     <div class="col-md-4 float-left">
-                                        <form action="#">
+                                        <form action="{{ 'buku' }}" method="GET">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Cari buku">
-                                                <button class="btn btn-outline-secondary" type="submit">Cari</button>
+                                                <input type="text" class="form-control" name="cari" placeholder="Cari judul buku">
+                                                <span class="input-group-prepend">
+                                                    <button class="btn btn-outline-secondary" type="submit">Cari</button>
+                                                </span>
                                             </div>
                                         </form>
                                     </div>

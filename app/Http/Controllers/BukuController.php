@@ -13,12 +13,21 @@ class BukuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $dataBuku = DB::table('rak_buku')
-            ->join('buku', 'id_buku', '=', 'buku.id')
-            ->join('jenis_buku', 'id_jenis_buku', '=', 'jenis_buku.id')
-            ->get();
+        if ($request->has('cari')) {
+            $search = $request->cari;
+            $dataBuku = DB::table('rak_buku')
+                ->join('buku', 'id_buku', '=', 'buku.id')
+                ->join('jenis_buku', 'id_jenis_buku', '=', 'jenis_buku.id')
+                ->where('judul', 'like', '%' . $search . '%')
+                ->get();
+        } else {
+            $dataBuku = DB::table('rak_buku')
+                ->join('buku', 'id_buku', '=', 'buku.id')
+                ->join('jenis_buku', 'id_jenis_buku', '=', 'jenis_buku.id')
+                ->get();
+        }
 
         $dataidBuku = DB::table('buku')->get();
         $dataidJenisBuku = DB::table('jenis_buku')->get();
@@ -104,22 +113,10 @@ class BukuController extends Controller
      */
     public function destroy($id)
     {
-        //
-        // $delete = DB::table('rak_buku, buku, jenis_buku')
-        //     ->join('buku', 'id_buku', '=', 'buku.id')
-        //     ->join('jenis_buku', 'id_jenis_buku', '=', 'jenis_buku.id')
-        //     ->where('rak_buku.id', '=', $id)
-        //     ->delete();
-
         DB::delete("DELETE rak_buku, jenis_buku, buku from rak_buku
         INNER JOIN jenis_buku ON rak_buku.id_jenis_buku = jenis_buku.id
         INNER JOIN buku ON rak_buku.id_buku = buku.id
         WHERE rak_buku.id = '$id'");
-
-        // print("<pre>" . print_r($delete, true) . "</​pre>");
-
-        // $buku = Buku::find($id);
-        // $buku->delete();
 
         return redirect('buku');
     }
